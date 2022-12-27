@@ -1,7 +1,7 @@
 {
-  "name": "11-room-homepage-master",
+  "name": "12-ip-address-tracker-master",
   "version": "1.0.0",
-  "description": "You can discover innovative ways to decorate your home",
+  "description": "IP address tracker",
   "main": "index.js",
   "scripts": {
     "watch:sass": "sass scss/main.scss css/style.css -w",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.13",
+    "dotenv": "^16.0.3",
     "postcss": "^8.4.19",
     "postcss-cli": "^10.0.0"
   }

@@ -1,0 +1,62 @@
+:root {
+  // PRAIMARY COLORS
+  --very-dark-gray: hsl(0, 0%, 17%);
+  --dark-gray: hsl(0, 0%, 59%);
+  --light-gray: hsl(0, 0%, 79%);
+  --white: #fff;
+
+  // TYPOGRAPHY
+  --text-imput: 1.8rem;
+
+  // FONT
+  --major-font-family: "Rubik", sans-serif;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+
+  // DESKTOP WIDTH
+  --desktop-width: 144rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%;
+}
+
+// img {
+//   display: inline-block;
+// }
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%;
+}
+
+
+
+// It istriggered when the user clicks or taps on an element or selects it with the keyboard's TAB.
+// *:focus {
+//   outline: none;
+//   border-radius: 0.2rem;
+//   box-shadow: 0 0 0 0.4rem rgba(90, 81, 70, 0.5);
+// }
+
+// // Applies styles to the part of a document that has been highlight
+// ::selection {
+//   background-color: var(--very-dark-gray);
+//   color: #fff;
+// }
