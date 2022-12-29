@@ -37,7 +37,7 @@ let markerIcon;
 const updateCoords = (coords) => {
   map.setView(coords, 16);
 
-  // If marker icon is on the map (marker icon not null), we remove it
+  // If marker icon is on the map (marker icon not null), we remove it, if there is we render marker icon.(this happens when we render a web page for the firs time)
   if (markerIcon != null && markerIcon != undefined) markerIcon.remove();
   // We update marker icon coords (lat/lng) and add on the map
   markerIcon = L.marker(coords, { icon: myIcon });
@@ -77,7 +77,6 @@ const ipData = (ipRequested = "") => {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       renderLocationData(data);
     })
 
@@ -95,5 +94,3 @@ searchBtn.addEventListener("click", (e) => {
     return;
   }
 });
-const domainName = window.location.hostname;
-console.log(domainName);

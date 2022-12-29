@@ -4,6 +4,7 @@
   --light-gray: hsl(0, 0%, 79%);
   --white: #fff;
   --text-selection: rgb(88, 118, 221);
+  --dark-gray: hsl(0, 0%, 27%);
   --text-imput: 1.8rem;
   --major-font-family: "Rubik", sans-serif;
   --font-regular: 400;
@@ -67,6 +68,7 @@ html {
 
 .header {
   background-image: url(../images/pattern-bg.png);
+  background-repeat: no-repeat;
   max-width: 144rem;
   height: 25rem;
   position: relative;
@@ -114,6 +116,7 @@ html {
 }
 .search__btn {
   border: none;
+  background: none;
   background-color: var(--very-dark-gray);
   border-top-right-radius: 1.4rem;
   border-bottom-right-radius: 1.4rem;
@@ -121,6 +124,10 @@ html {
   height: 5.5rem;
   z-index: 100;
   cursor: pointer;
+  transition: all 210ms;
+}
+.search__btn:hover {
+  background-color: var(--dark-gray);
 }
 
 .error-message {
@@ -199,7 +206,7 @@ html {
   transform-origin: bottom center;
   background-color: var(--very-dark-gray);
   z-index: -1;
-  transition: transform 210ms;
+  transition: all 210ms;
 }
 .attribution a:hover::before {
   transform: scaleY(1);
