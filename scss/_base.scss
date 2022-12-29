@@ -5,6 +5,8 @@
   --light-gray: hsl(0, 0%, 79%);
   --white: #fff;
 
+  --text-selection: rgb(88, 118, 221);
+
   // TYPOGRAPHY
   --text-imput: 1.8rem;
 
@@ -38,25 +40,20 @@ body {
   font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%;
 }
 
-// img {
-//   display: inline-block;
-// }
 html {
   box-sizing: border-box;
   font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%;
 }
 
-
-
 // It istriggered when the user clicks or taps on an element or selects it with the keyboard's TAB.
-// *:focus {
-//   outline: none;
-//   border-radius: 0.2rem;
-//   box-shadow: 0 0 0 0.4rem rgba(90, 81, 70, 0.5);
-// }
+*:focus {
+  outline: none;
+  border-radius: 0.2rem;
+  box-shadow: 0 0 0 0.4rem rgba(30, 41, 136, 0.4);
+}
 
 // // Applies styles to the part of a document that has been highlight
-// ::selection {
-//   background-color: var(--very-dark-gray);
-//   color: #fff;
-// }
+::selection {
+  background-color: var(--text-selection);
+  color: #fff;
+}

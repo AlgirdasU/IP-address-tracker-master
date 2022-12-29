@@ -1,6 +1,6 @@
 "use strict";
 
-const apiKey = "at_a8h5P03D0MPft1u9Cg58Fz6T156Ci";
+const apiKey = "at_SQ2YPNBbRxw1cx3rU2QLwBHMsHyFi";
 
 const currentIp = document.querySelector(".data__ip");
 const currentLocation = document.querySelector(".data__location");
@@ -8,48 +8,40 @@ const currentTimeZone = document.querySelector(".data__zone");
 const currentIsp = document.querySelector(".data__isp");
 
 const searchInput = document.querySelector(".search__input");
-console.log(searchInput);
 const searchBtn = document.querySelector(".search__btn");
+const errorMessage = document.querySelector(".error-message");
 
-if (
-  navigator.geolocation &&
-  searchInput.value === ""
-  // &&  searchInput.value != null
-)
-  // Shows my location
-  navigator.geolocation.getCurrentPosition((position) => {
-    const { latitude } = position.coords;
-    const { longitude } = position.coords;
-    const coords = [latitude, longitude];
-    updateCoords(coords);
-    console.log(position);
-  });
+const renderError = (msg) => {
+  errorMessage.textContent = msg;
+  setTimeout(() => {
+    errorMessage.textContent = "";
+  }, 4000);
+};
+// Map creation start
+const map = L.map("map");
 
+L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+
+// marker icon/icon size
+const myIcon = L.icon({
+  iconUrl: "./images/icon-location.svg",
+  iconSize: [32, 40],
+  iconAnchor: [10, 30],
+});
+
+let markerIcon;
+// Map view by coords(lat/lng)
 const updateCoords = (coords) => {
-  // Checks if there is the map
-  const container = L.DomUtil.get("map");
-  console.log(container);
-  if (container != null) {
-    container._leaflet_id = null;
-  }
-  // If so, update to the new map
-  const map = L.map("map").setView(coords, 13);
-  console.log(map);
-  L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
+  map.setView(coords, 16);
 
-  // Transform marker icon
-  const markerIcon = L.icon({
-    iconUrl: "./images/icon-location.svg",
-    iconSize: [32, 40], // size of the icon
-    iconAnchor: [10, 41], // point of the icon which will correspond to marker's location
-    popupAnchor: [2, -40], // point from which the popup should open relative to the iconAnchor
-  });
-  // The marker icon shows the location
-  L.marker(coords, { icon: markerIcon }).addTo(map).openPopup();
-  console.log(coords);
+  // If marker icon is on the map (marker icon not null), we remove it
+  if (markerIcon != null && markerIcon != undefined) markerIcon.remove();
+  // We update marker icon coords (lat/lng) and add on the map
+  markerIcon = L.marker(coords, { icon: myIcon });
+  markerIcon.addTo(map);
 };
 
 const renderLocationData = (data) => {
@@ -60,42 +52,48 @@ const renderLocationData = (data) => {
   const { lat } = data.location;
   const { lng } = data.location;
   const coords = [lat, lng];
+  console.log(coords);
   updateCoords(coords);
-  console.log(data);
 };
 
-const ipData = (ipRequested) => {
-  fetch(
-    // `https://geo.ipify.org/api/v2/country,city?apiKey=at_a8h5P03D0MPft1u9Cg58Fz6T156Ci&ipAddress=${ipRequested}`
-    `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&ipAddress=${ipRequested}`
-  )
+const noIpData = (data) => {
+  currentIp.innerHTML = data;
+  currentLocation.innerHTML = data;
+  currentTimeZone.innerHTML = data;
+  currentIsp.innerHTML = data;
+};
+
+const ipData = (ipRequested = "") => {
+  const url =
+    ipRequested === ""
+      ? `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&ipAddress=`
+      : `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&ipAddress=${ipRequested}`;
+  fetch(url)
     .then((response) => {
+      if (!response.ok) {
+        noIpData("N/A");
+        throw new Error(`Please enter a valid IP address`);
+      }
       return response.json();
     })
     .then((data) => {
+      console.log(data);
       renderLocationData(data);
-    });
-  // .catch((error) => alert("Please enter valid IP Address"));
-};
+    })
 
-// my ip
-const myIp = fetch("https://api.ipify.org?format=json")
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    ipData(data.ip);
-  });
-// my ip end
+    .catch((err) => {
+      console.error(`${err}`);
+      renderError(`${err.message} and try again!`);
+    });
+};
+ipData("");
 
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (searchInput.value != "" && searchInput.value != null) {
     ipData(searchInput.value);
-    console.log(searchInput.value);
-
     return;
   }
-  // alert("Please enter a valid IP Address");
-  // console.log(ipData());
 });
+const domainName = window.location.hostname;
+console.log(domainName);

@@ -3,6 +3,7 @@
   --dark-gray: hsl(0, 0%, 59%);
   --light-gray: hsl(0, 0%, 79%);
   --white: #fff;
+  --text-selection: rgb(88, 118, 221);
   --text-imput: 1.8rem;
   --major-font-family: "Rubik", sans-serif;
   --font-regular: 400;
@@ -34,6 +35,17 @@ body {
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+}
+
+*:focus {
+  outline: none;
+  border-radius: 0.2rem;
+  box-shadow: 0 0 0 0.4rem rgba(30, 41, 136, 0.4);
+}
+
+::selection {
+  background-color: var(--text-selection);
+  color: #fff;
 }
 
 .body-container {
@@ -80,16 +92,17 @@ html {
 .search {
   text-align: center;
   display: flex;
-  margin: 0 1rem 0;
+  margin: 0 2rem 0;
 }
 .search__input {
   font-family: inherit;
-  height: 6rem;
+  height: 5.5rem;
   width: 100%;
-  border-radius: 1.4rem;
+  border-top-left-radius: 1.4rem;
+  border-bottom-left-radius: 1.4rem;
   border: none;
   font-size: inherit;
-  padding-left: 2.4rem;
+  padding: 0 2.4rem 0;
   color: var(--dark-gray);
   outline: none;
 }
@@ -105,15 +118,21 @@ html {
   border-top-right-radius: 1.4rem;
   border-bottom-right-radius: 1.4rem;
   width: 6rem;
-  height: 6rem;
-  margin-left: -6rem;
+  height: 5.5rem;
+  z-index: 100;
   cursor: pointer;
+}
+
+.error-message {
+  font-size: 1.4rem;
+  color: var(--white);
+  text-align: center;
+  padding: 0.2rem;
 }
 
 .main {
   background-color: var(--white);
-  max-width: 111rem;
-  width: 100%;
+  width: 80%;
   min-height: 16rem;
   border-radius: 1.4rem;
   display: flex;
@@ -125,12 +144,12 @@ html {
 }
 
 .data {
-  display: flex;
-  padding: 4rem 0 4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 3rem 0 3rem;
   width: 100%;
 }
 .data__box {
-  width: 25%;
   padding: 0 2rem 0;
 }
 .data__box:not(:last-child) {
@@ -155,13 +174,36 @@ html {
   z-index: 1;
 }
 
-.attribution {
-  font-size: 11px;
+.footer {
+  position: absolute;
+  left: 50%;
+  margin-top: 1rem;
+  transform: translate(-50%);
   text-align: center;
 }
 
 .attribution a {
-  color: hsl(228deg, 45%, 44%);
+  color: var(--very-dark-gray);
+  text-decoration: none;
+  position: relative;
+  white-space: nowrap;
+}
+.attribution a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.8px;
+  transform: scaleX(0);
+  transform-origin: bottom center;
+  background-color: var(--very-dark-gray);
+  z-index: -1;
+  transition: transform 210ms;
+}
+.attribution a:hover::before {
+  transform: scaleY(1);
+  color: var(--white);
 }
 
 /*# sourceMappingURL=style.css.map */

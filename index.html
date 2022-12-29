@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
+
     <meta
       name="description"
       content="IP address tracker. Also you can find location and timezone."
@@ -44,7 +44,6 @@
     ></script>
 
     <script defer src="js/script.js"></script>
-    <!-- <script defer src="js/other.js"></script> -->
   </head>
   <body class="body-container">
     <div class="container">
@@ -70,45 +69,47 @@
               </svg>
             </button>
           </form>
+          <div class="error-message"></div>
         </div>
       </header>
       <main class="main">
         <section class="data">
           <div class="data__box">
             <h2 class="data__title">ip address</h2>
-            <span class="data__value data__ip"></span>
+            <span class="data__value data__ip">N/A</span>
           </div>
           <div class="data__box">
             <h2 class="data__title">location</h2>
-            <span class="data__value data__location"
-              ></span
-            >
+            <span class="data__value data__location">N/A</span>
           </div>
           <div class="data__box">
             <h2 class="data__title">timezone utc</h2>
-            <span class="data__value data__zone"></span>
+            <span class="data__value data__zone">N/A</span>
           </div>
           <div class="data__box">
             <h2 class="data__title">isp</h2>
-            <span class="data__value data__isp"></span>
+            <span class="data__value data__isp">N/A</span>
           </div>
         </section>
       </main>
       <div id="map"></div>
 
-      <!-- IP Address Tracker Search for any IP address or domain IP Address Location
-    Timezone UTC  ISP -->
-      <!-- add offset value dynamically using the API -->
+      <footer class="footer">
+        <div class="attribution">
+          <p class="attribution__content">
+            <span>Challenge by</span>
 
-      <div class="attribution">
-        Challenge by
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-          >Frontend Mentor</a
-        >. Coded by
-        <a href="https://github.com/AlgirdasU/IP-address-tracker-master"
-          >Algirdas</a
-        >.
-      </div>
+            <a
+              href="https://www.frontendmentor.io?ref=challenge"
+              target="_blank"
+              >Frontend Mentor</a
+            ><span>. Coded by </span
+            ><a href="https://github.com/AlgirdasU/IP-address-tracker-master"
+              >Algirdas</a
+            >.
+          </p>
+        </div>
+      </footer>
     </div>
   </body>
 </html>

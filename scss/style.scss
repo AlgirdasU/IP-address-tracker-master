@@ -43,16 +43,17 @@
 .search {
   text-align: center;
   display: flex;
-  margin: 0 1rem 0;
+  margin: 0 2rem 0;
 
   &__input {
     font-family: inherit;
-    height: 6rem;
+    height: 5.5rem;
     width: 100%;
-    border-radius: 1.4rem;
+    border-top-left-radius: 1.4rem;
+    border-bottom-left-radius: 1.4rem;
     border: none;
     font-size: inherit;
-    padding-left: 2.4rem;
+    padding: 0 2.4rem 0;
     color: var(--dark-gray);
     outline: none;
 
@@ -71,19 +72,25 @@
     border-top-right-radius: 1.4rem;
     border-bottom-right-radius: 1.4rem;
     width: 6rem;
-    height: 6rem;
-    margin-left: -6rem;
-
+    height: 5.5rem;
+    // margin-left: -6rem;
+    z-index: 100;
     cursor: pointer;
   }
 }
 
+.error-message {
+  font-size: 1.4rem;
+  color: var(--white);
+  text-align: center;
+  padding: 0.2rem;
+}
 .main {
   background-color: var(--white);
-  max-width: 111rem;
-  width: 100%;
+
+  width: 80%;
   min-height: 16rem;
-  // margin: 0 auto;
+  
   border-radius: 1.4rem;
   display: flex;
   box-shadow: 0 0.01rem 10rem 0rem rgba(14, 16, 41, 0.08);
@@ -93,12 +100,13 @@
   z-index: 10;
 }
 .data {
-  display: flex;
-  padding: 4rem 0 4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 3rem 0 3rem;
   width: 100%;
 
   &__box {
-    width: 25%;
+    // width: 25%;
     padding: 0 2rem 0;
 
     &:not(:last-child) {
@@ -131,11 +139,38 @@
   // transform: translateY(-16rem);
 }
 
-.attribution {
-  font-size: 11px;
+.footer {
+  position: absolute;
+  left: 50%;
+  margin-top: 1rem;
+  transform: translate(-50%);
 
   text-align: center;
 }
+
 .attribution a {
-  color: hsl(228, 45%, 44%);
+  color: var(--very-dark-gray);
+  text-decoration: none;
+  position: relative;
+  white-space: nowrap;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.8px;
+    transform: scaleX(0);
+    transform-origin: bottom center;
+    background-color: var(--very-dark-gray);
+
+    z-index: -1;
+    transition: transform 210ms;
+  }
+
+  &:hover::before {
+    transform: scaleY(1);
+    color: var(--white);
+  }
 }
